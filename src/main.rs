@@ -15,7 +15,6 @@ use std::sync::{Mutex, Arc, RwLock};
 mod shader;
 mod util;
 
-use gl::GenBuffers;
 use glutin::event::{Event, WindowEvent, DeviceEvent, KeyboardInput, ElementState::{Pressed, Released}, VirtualKeyCode::{self, *}};
 use glutin::event_loop::ControlFlow;
 
@@ -159,8 +158,17 @@ fn main() {
 
         // == // Set up your VAO around here
 
-        let my_vao = unsafe { 1337 };
+        let vertices = vec![
+            -0.6, -0.6, 0.0,    //v1
+            0.6, -0.6, 0.0,     //v2
+            0.0, 0.6, 0.0       //v3
+        ];
 
+        let indices = vec![0, 1, 2];
+
+        let my_vao = unsafe { 
+            create_vao(&vertices, &indices)
+        };
 
         // == // Set up your shaders here
 
@@ -171,14 +179,17 @@ fn main() {
         // This snippet is not enough to do the exercise, and will need to be modified (outside
         // of just using the correct path), but it only needs to be called once
 
-        /*
+        
         let simple_shader = unsafe {
             shader::ShaderBuilder::new()
-                .attach_file("./path/to/simple/shader.file")
+                .attach_file("./shaders/simple.vert")
+                .attach_file("./shaders/simple.frag")
                 .link()
         };
-        */
 
+        unsafe {
+            simple_shader.activate();
+        }
 
         // Used to demonstrate keyboard handling for exercise 2.
         let mut _arbitrary_number = 0.0; // feel free to remove
@@ -244,9 +255,7 @@ fn main() {
 
 
                 // == // Issue the necessary gl:: commands to draw your scene here
-
-
-
+                gl::DrawElements(gl::TRIANGLES, 3, gl::UNSIGNED_INT, 0 as *const c_void);
             }
 
             // Display the new color buffer on the display
