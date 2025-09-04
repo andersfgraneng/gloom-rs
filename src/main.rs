@@ -15,6 +15,7 @@ use std::sync::{Mutex, Arc, RwLock};
 mod shader;
 mod util;
 
+use gl::GenBuffers;
 use glutin::event::{Event, WindowEvent, DeviceEvent, KeyboardInput, ElementState::{Pressed, Released}, VirtualKeyCode::{self, *}};
 use glutin::event_loop::ControlFlow;
 
@@ -60,14 +61,40 @@ unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
 
     // This should:
     // * Generate a VAO and bind it
+    let mut array = 0;
+    gl::GenVertexArrays(1, &mut array);
+    gl::BindVertexArray(array);
+
     // * Generate a VBO and bind it
+    let mut buffer = 0;
+    gl::GenBuffers(1, &mut buffer);
+    gl::BindBuffer(gl::ARRAY_BUFFER, buffer);
+
     // * Fill it with data
+    let size = vertices.len() as isize * mem::size_of::<f32>() as isize;
+    let data = vertices.as_ptr() as *const c_void;
+    gl::BufferData(gl::ARRAY_BUFFER, size, data, gl::STATIC_DRAW);
+
     // * Configure a VAP for the data and enable it
+    let index = 1;
+    let size = 3;
+    let stride = 0;
+    let pointer = 0 as *const c_void;
+    gl::VertexAttribPointer(index, size, gl::BYTE, gl::FALSE, stride, pointer);
+    gl::EnableVertexAttribArray(index);
+
     // * Generate a IBO and bind it
+    let mut index_buffer = 0;
+    gl::GenBuffers(1, &mut index_buffer);
+    gl::BindBuffer(gl::ELEMENT_ARRAY_BUFFER, index_buffer);
+
     // * Fill it with data
+    let index_size = indices.len() as isize * mem::size_of::<u32>() as isize;
+    let index_data = indices.as_ptr() as *const c_void;
+    gl::BufferData(gl::ELEMENT_ARRAY_BUFFER, index_size, index_data, gl::STATIC_DRAW);
     // * Return the ID of the VAO
 
-    0
+    array
 }
 
 
