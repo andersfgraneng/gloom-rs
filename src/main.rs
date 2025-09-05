@@ -70,15 +70,15 @@ unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
     gl::BindBuffer(gl::ARRAY_BUFFER, buffer);
 
     // * Fill it with data
-    let size = vertices.len() as isize * mem::size_of::<f32>() as isize;
-    let data = vertices.as_ptr() as *const c_void;
+    let size = byte_size_of_array(vertices);//vertices.len() as isize * mem::size_of::<f32>() as isize;
+    let data = pointer_to_array(vertices);//vertices.as_ptr() as *const c_void;
     gl::BufferData(gl::ARRAY_BUFFER, size, data, gl::STATIC_DRAW);
 
     // * Configure a VAP for the data and enable it
     let index = 0;
     let size = 3;
     let stride = 0;
-    let pointer = 0 as *const c_void;
+    let pointer = offset::<f32>(0);
     gl::VertexAttribPointer(index, size, gl::BYTE, gl::FALSE, stride, pointer);
     gl::EnableVertexAttribArray(index);
 
@@ -88,8 +88,8 @@ unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
     gl::BindBuffer(gl::ELEMENT_ARRAY_BUFFER, index_buffer);
 
     // * Fill it with data
-    let index_size = indices.len() as isize * mem::size_of::<u32>() as isize;
-    let index_data = indices.as_ptr() as *const c_void;
+    let index_size = byte_size_of_array(indices);//indices.len() as isize * mem::size_of::<u32>() as isize;
+    let index_data = pointer_to_array(indices);//indices.as_ptr() as *const c_void;
     gl::BufferData(gl::ELEMENT_ARRAY_BUFFER, index_size, index_data, gl::STATIC_DRAW);
     // * Return the ID of the VAO
 
@@ -255,6 +255,8 @@ fn main() {
 
 
                 // == // Issue the necessary gl:: commands to draw your scene here
+                
+                gl::BindVertexArray(my_vao);
                 let draw_indices = 0 as *const c_void;
                 gl::DrawElements(gl::TRIANGLES, 3, gl::UNSIGNED_INT, draw_indices);
             }
