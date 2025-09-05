@@ -255,7 +255,8 @@ fn main() {
 
 
                 // == // Issue the necessary gl:: commands to draw your scene here
-                gl::DrawElements(gl::TRIANGLES, 3, gl::UNSIGNED_INT, 0 as *const c_void);
+                let draw_indices = 0 as *const c_void;
+                gl::DrawElements(gl::TRIANGLES, 3, gl::UNSIGNED_INT, draw_indices);
             }
 
             // Display the new color buffer on the display
