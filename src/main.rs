@@ -77,9 +77,8 @@ unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
     // * Configure a VAP for the data and enable it
     let index = 0;
     let size = 3;
-    let stride = 0;
-    let pointer = offset::<f32>(0);
-    gl::VertexAttribPointer(index, size, gl::BYTE, gl::FALSE, stride, pointer);
+    let stride = 3 * size_of::<f32>();
+    gl::VertexAttribPointer(index, size, gl::BYTE, gl::FALSE, stride, ptr::null());
     gl::EnableVertexAttribArray(index);
 
     // * Generate a IBO and bind it
@@ -257,8 +256,7 @@ fn main() {
                 // == // Issue the necessary gl:: commands to draw your scene here
                 
                 gl::BindVertexArray(my_vao);
-                let draw_indices = 0 as *const c_void;
-                gl::DrawElements(gl::TRIANGLES, 3, gl::UNSIGNED_INT, draw_indices);
+                gl::DrawElements(gl::TRIANGLES, indices.len() as i32, gl::UNSIGNED_INT, ptr::null());
             }
 
             // Display the new color buffer on the display
