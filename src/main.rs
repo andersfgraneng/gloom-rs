@@ -75,7 +75,7 @@ unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
     gl::BufferData(gl::ARRAY_BUFFER, size, data, gl::STATIC_DRAW);
 
     // * Configure a VAP for the data and enable it
-    let index = 1;
+    let index = 0;
     let size = 3;
     let stride = 0;
     let pointer = 0 as *const c_void;
