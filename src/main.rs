@@ -78,7 +78,7 @@ unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
     let index = 0;
     let size = 3;
     let stride = 3 * size_of::<f32>();
-    gl::VertexAttribPointer(index, size, gl::BYTE, gl::FALSE, stride, ptr::null());
+    gl::VertexAttribPointer(index, size, gl::FLOAT, gl::FALSE, stride, ptr::null());
     gl::EnableVertexAttribArray(index);
 
     // * Generate a IBO and bind it
@@ -254,7 +254,6 @@ fn main() {
 
 
                 // == // Issue the necessary gl:: commands to draw your scene here
-                
                 gl::BindVertexArray(my_vao);
                 gl::DrawElements(gl::TRIANGLES, indices.len() as i32, gl::UNSIGNED_INT, ptr::null());
             }
