@@ -10,14 +10,15 @@ pub fn getShape() -> Shape {
     let task = &args[1];
 
     return match task.as_str() {
-        "1c" => getFiveTriangles(),
-        "2a" => getASingleTriangle(),
+        "1c" => get_1c_triangles(),
+        "2a" => get_2a_triangle(),
+        "2b" => get_2b_triangle(),
         _ => getATestTriangle()
     }
 }
 
 // Task 1 c)
-fn getFiveTriangles() -> Shape {
+fn get_1c_triangles() -> Shape {
     let vertices = vec![
         -0.9, -0.9, 0.0,
         -0.6, -0.6, 0.0,
@@ -51,7 +52,7 @@ fn getFiveTriangles() -> Shape {
     (vertices, indices)
 }
 
-fn getASingleTriangle() -> Shape {
+fn get_2a_triangle() -> Shape {
     let vertices = vec![
         0.6, -0.8, -1.2,
         0.0, 0.4, 0.0,
@@ -63,6 +64,18 @@ fn getASingleTriangle() -> Shape {
     ];
 
     (vertices, indices)
+}
+
+fn get_2b_triangle() -> Shape {
+    let vertices = vec![
+        -0.6, -0.6, 0.0,    
+        0.6, -0.6, 0.0,     
+        0.0, 0.6, 0.0       
+    ];
+
+    let indices = vec![0, 2, 1];
+
+    return (vertices, indices)
 }
 
 fn getATestTriangle() -> Shape {

@@ -52,3 +52,21 @@ This happens when we try to render elemen outside the bounds of the clip box. As
 
 #### iii)
 The purpose of the clipbox is to prevent opengl from rendering items which cannot be seen by the viewport. This also means that elements behind another element would normally be clipped as well.
+
+### b)
+
+![
+    The resulting black screen of task 2b
+](images/2a.png)
+
+#### i)
+
+What happens is that we get a black/blank screen because the triangle is not getting rendered.
+
+#### ii)
+
+This happens because the path between the vertices defined by the indices has no space to fill with color. Therefore we get a black window.
+
+#### iii)
+
+This happens when opengl "traverses" the path of the vertices defined by the indices such that the triangle is not enclosed at the left side of the path. This is because opengl fills this enclosed space with the color therefore rendering the triangle. When we swap the place of two indices we modify the traversal such that the enclosed space is on the right side of the direction of travel. Because of this it does not render. However if we pop the last index and push it to the front (for a single triangle in this case) it would still render because the direction of the traversal would stay on the left side. E.g [2, 0, 1] and [1, 2, 0].
