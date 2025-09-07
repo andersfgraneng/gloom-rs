@@ -84,8 +84,12 @@ This happens when opengl "traverses" the path of the vertices defined by the ind
     The triangle after inverting
 ](images/2di-inverted.png)
 
-I acheived this inverting by multiplying the vector coordinates in the vertex shader with a factor of -1.
+I achieved this inverting by multiplying the vector coordinates in the vertex shader with a factor of -1.
 
 #### ii)
 
+![
+    The triangle after getting a new colour 
+](images/2dii.png)
 
+I achieved this by modifying the output vector in the fragment shader with some float between 0 and 1 for each value.
