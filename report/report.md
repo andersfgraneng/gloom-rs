@@ -57,7 +57,7 @@ The purpose of the clipbox is to prevent opengl from rendering items which canno
 
 ![
     The resulting black screen of task 2b
-](images/2a.png)
+](images/2b.png)
 
 #### i)
 
