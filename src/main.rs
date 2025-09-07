@@ -14,6 +14,7 @@ use std::sync::{Mutex, Arc, RwLock};
 
 mod shader;
 mod util;
+mod shapes;
 
 use glutin::event::{Event, WindowEvent, DeviceEvent, KeyboardInput, ElementState::{Pressed, Released}, VirtualKeyCode::{self, *}};
 use glutin::event_loop::ControlFlow;
@@ -157,13 +158,10 @@ fn main() {
 
         // == // Set up your VAO around here
 
-        let vertices = vec![
-            -0.6, -0.6, 0.0,    //v1
-            0.6, -0.6, 0.0,     //v2
-            0.0, 0.6, 0.0       //v3
-        ];
-
-        let indices = vec![0, 1, 2];
+        // reads task number from cmd and returns given shapes
+        // e.g cargo run -- 1c
+        // this made it easier for me to change code
+        let (vertices, indices) = shapes::getShape();
 
         let my_vao = unsafe { 
             create_vao(&vertices, &indices)
