@@ -70,3 +70,22 @@ This happens because the path between the vertices defined by the indices has no
 #### iii)
 
 This happens when opengl "traverses" the path of the vertices defined by the indices such that the triangle is not enclosed at the left side of the path. This is because opengl fills this enclosed space with the color therefore rendering the triangle. When we swap the place of two indices we modify the traversal such that the enclosed space is on the right side of the direction of travel. Because of this it does not render. However if we pop the last index and push it to the front (for a single triangle in this case) it would still render because the direction of the traversal would stay on the left side. E.g [2, 0, 1] and [1, 2, 0].
+
+
+### d)
+
+#### i)
+
+![
+    The triangle before inverting
+](images/2di.png)
+
+![
+    The triangle after inverting
+](images/2di-inverted.png)
+
+I acheived this inverting by multiplying the vector coordinates in the vertex shader with a factor of -1.
+
+#### ii)
+
+

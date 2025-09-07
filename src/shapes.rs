@@ -4,7 +4,7 @@ type Shape = (Vec<f32>, Vec<u32>);
 pub fn getShape() -> Shape {
     let args: Vec<String> = std::env::args().collect();
     if args.len() <= 1 {
-        return getATestTriangle()
+        return get_a_triangle()
     }
 
     let task = &args[1];
@@ -13,7 +13,7 @@ pub fn getShape() -> Shape {
         "1c" => get_1c_triangles(),
         "2a" => get_2a_triangle(),
         "2b" => get_2b_triangle(),
-        _ => getATestTriangle()
+        _ => get_a_triangle()
     }
 }
 
@@ -78,9 +78,9 @@ fn get_2b_triangle() -> Shape {
     return (vertices, indices)
 }
 
-fn getATestTriangle() -> Shape {
+fn get_a_triangle() -> Shape {
     let vertices = vec![
-        -0.6, -0.6, 0.0,    //v1
+        -0.2, -0.6, 0.0,    //v1
         0.6, -0.6, 0.0,     //v2
         0.0, 0.6, 0.0       //v3
     ];
