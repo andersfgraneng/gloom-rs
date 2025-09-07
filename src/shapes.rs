@@ -4,14 +4,15 @@ type Shape = (Vec<f32>, Vec<u32>);
 pub fn getShape() -> Shape {
     let args: Vec<String> = std::env::args().collect();
     if args.len() <= 1 {
-        return getASingleTriangle()
+        return getATestTriangle()
     }
 
     let task = &args[1];
 
     return match task.as_str() {
         "1c" => getFiveTriangles(),
-        _ => getASingleTriangle()
+        "2a" => getASingleTriangle(),
+        _ => getATestTriangle()
     }
 }
 
@@ -51,6 +52,20 @@ fn getFiveTriangles() -> Shape {
 }
 
 fn getASingleTriangle() -> Shape {
+    let vertices = vec![
+        0.6, -0.8, -1.2,
+        0.0, 0.4, 0.0,
+        -0.8, -0.2, 1.2
+    ];
+
+    let indices = vec![
+        0, 1, 2,
+    ];
+
+    (vertices, indices)
+}
+
+fn getATestTriangle() -> Shape {
     let vertices = vec![
         -0.6, -0.6, 0.0,    //v1
         0.6, -0.6, 0.0,     //v2
