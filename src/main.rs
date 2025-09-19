@@ -54,7 +54,11 @@ fn offset<T>(n: u32) -> *const c_void {
 
 
 // == // Generate your VAO here
-unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
+unsafe fn create_vao(
+    vertices: &Vec<f32>,
+    indices: &Vec<u32>,
+    colors: &Vec<f32>
+) -> u32 {
     // Implement me!
 
     // Also, feel free to delete comments :)
@@ -65,20 +69,22 @@ unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
     gl::GenVertexArrays(1, &mut array);
     gl::BindVertexArray(array);
 
-    // * Generate a VBO and bind it
-    let mut buffer = 0;
-    gl::GenBuffers(1, &mut buffer);
-    gl::BindBuffer(gl::ARRAY_BUFFER, buffer);
-
+    // * Generate a VBO for vertices and bind it
     // * Fill it with data
-    let size = byte_size_of_array(vertices);//vertices.len() as isize * mem::size_of::<f32>() as isize;
-    let data = pointer_to_array(vertices);//vertices.as_ptr() as *const c_void;
-    gl::BufferData(gl::ARRAY_BUFFER, size, data, gl::STATIC_DRAW);
+    create_and_fill_vbo(vertices);
 
-    // * Configure a VAP for the data and enable it
+    // * Configure a VAP for the vertices and enable it
     let index = 0;
     let size = 3;
     let stride = 3 * size_of::<f32>();
+    gl::VertexAttribPointer(index, size, gl::FLOAT, gl::FALSE, stride, ptr::null());
+    gl::EnableVertexAttribArray(index);
+
+    create_and_fill_vbo(colors);
+
+    let index = 1;
+    let size = 4;
+    let stride = 4 * size_of::<f32>();
     gl::VertexAttribPointer(index, size, gl::FLOAT, gl::FALSE, stride, ptr::null());
     gl::EnableVertexAttribArray(index);
 
@@ -96,6 +102,17 @@ unsafe fn create_vao(vertices: &Vec<f32>, indices: &Vec<u32>) -> u32 {
     array
 }
 
+unsafe fn create_and_fill_vbo(data_vector: &Vec<f32>) {
+    // * Generate a VBO for vertices and bind it
+    let mut buffer = 0;
+    gl::GenBuffers(1, &mut buffer);
+    gl::BindBuffer(gl::ARRAY_BUFFER, buffer);
+
+    // * Fill it with data
+    let size = byte_size_of_array(data_vector);
+    let data = pointer_to_array(data_vector);
+    gl::BufferData(gl::ARRAY_BUFFER, size, data, gl::STATIC_DRAW);
+}
 
 fn main() {
     // Set up the necessary objects to deal with windows and event handling
@@ -161,10 +178,10 @@ fn main() {
         // reads task number from cmd and returns given shapes
         // e.g cargo run -- 1c
         // this made it easier for me to change code
-        let (vertices, indices) = shapes::getShape();
+        let (vertices, indices, colors) = shapes::get_shape();
 
         let my_vao = unsafe { 
-            create_vao(&vertices, &indices)
+            create_vao(&vertices, &indices, &colors)
         };
 
         // == // Set up your shaders here

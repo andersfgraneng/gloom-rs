@@ -1,20 +1,60 @@
 
+type ShapeWithColors = (Vec<f32>, Vec<u32>, Vec<f32>);
 type Shape = (Vec<f32>, Vec<u32>);
 
-pub fn getShape() -> Shape {
+pub fn get_shape() -> ShapeWithColors {
     let args: Vec<String> = std::env::args().collect();
     if args.len() <= 1 {
-        return get_a_triangle()
+        return get_a2_1b_triangle()
     }
 
     let task = &args[1];
 
     return match task.as_str() {
-        "1c" => get_1c_triangles(),
-        "2a" => get_2a_triangle(),
-        "2b" => get_2b_triangle(),
-        _ => get_a_triangle()
+//        "a1_1c" => get_1c_triangles(),
+//        "a1_2a" => get_2a_triangle(),
+//        "a1_2b" => get_2b_triangle(),
+        "a2_1b" => get_a2_1b_triangle(),
+        _ => get_a2_1b_triangle()
     }
+}
+
+fn get_a2_1b_triangle() -> ShapeWithColors {
+    let vertices = vec![
+        -0.9, -0.9, 0.0,
+        -0.6, -0.6, 0.0,
+        -0.9, -0.6, 0.0,
+
+        -0.9, -0.5, 0.0,
+        -0.6, -0.5, 0.0,
+        -0.9, -0.2, 0.0,
+
+        -0.5, -0.9, 0.0,
+        -0.3, -0.3, 0.0,
+        -0.4, 0.0, 0.0,
+    ];
+
+    let indices = vec![
+        0, 1, 2,
+        3, 4, 5,
+        6, 7, 8,
+    ];
+
+    let colors = vec![
+        1.0, 0.0, 0.0, 1.0,
+        0.0, 1.0, 0.0, 1.0,
+        0.0, 0.0, 1.0, 1.0,
+
+        1.0, 1.0, 0.0, 1.0,
+        0.0, 1.0, 1.0, 1.0,
+        0.0, 1.0, 1.0, 1.0,
+
+        0.8, 0.5, 0.4, 1.0,
+        0.5, 0.2, 0.9, 1.0,
+        0.1, 0.6, 0.75, 1.0,
+    ];
+
+    (vertices, indices, colors)
 }
 
 // Task 1 c)
