@@ -38,4 +38,12 @@ This is a HTML-style comment, not visible in the final PDF.
 
 What happens here is that opengl blends the colors between the defined vertices.
 
+## Task 2
 
+### a)
+
+![
+    The resulting triangles of task 2a
+](images/a2_2a.png)
+
+### b)

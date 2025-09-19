@@ -15,8 +15,47 @@ pub fn get_shape() -> ShapeWithColors {
 //        "a1_2a" => get_2a_triangle(),
 //        "a1_2b" => get_2b_triangle(),
         "a2_1b" => get_a2_1b_triangle(),
+        "a2_2a" => get_a2_2a_triangle(),
         _ => get_a2_1b_triangle()
     }
+}
+
+fn get_a2_2a_triangle() -> ShapeWithColors {
+    let vertices = vec![
+        -0.9, -0.9, 0.0,
+        -0.1, -0.6, 0.0,
+        -0.9, -0.6, 0.0,
+
+        -0.9, -0.9, 0.1,
+        -0.1, -0.5, 0.1,
+        -0.9, -0.2, 0.1,
+
+        -0.5, -0.9, -0.2,
+        -0.3, -0.3, -0.2,
+        -0.4, 0.0, -0.2,
+    ];
+
+    let indices = vec![
+        0, 1, 2,
+        3, 4, 5,
+        6, 7, 8,
+    ];
+
+    let colors = vec![
+        1.0, 0.0, 0.0, 0.7,
+        1.0, 0.0, 0.0, 0.7,
+        1.0, 0.0, 0.0, 0.7,
+
+        0.0, 1.0, 0.0, 0.3,
+        0.0, 1.0, 0.0, 0.3,
+        0.0, 1.0, 0.0, 0.3,
+
+        0.0, 0.0, 1.0, 0.5,
+        0.0, 0.0, 1.0, 0.5,
+        0.0, 0.0, 1.0, 0.5,
+    ];
+
+    (vertices, indices, colors)
 }
 
 fn get_a2_1b_triangle() -> ShapeWithColors {
