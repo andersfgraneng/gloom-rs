@@ -269,6 +269,7 @@ fn main() {
 
 
                 // == // Issue the necessary gl:: commands to draw your scene here
+                gl::Uniform1f(2, elapsed.sin());
                 gl::BindVertexArray(my_vao);
                 gl::DrawElements(gl::TRIANGLES, indices.len() as i32, gl::UNSIGNED_INT, ptr::null());
             }

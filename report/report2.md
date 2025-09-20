@@ -58,6 +58,21 @@ When swapping the depth of the triangles we witness the same effect, but due to 
 
 ## Task 3
 
-### a)
+### b)
+
+| Variable   | Result    |
+|--------------- | --------------- |
+| a   | Modifying this variable results in shearing on the x-axis   |
+| b   | Modifying this variable results in shearing on the z-axis along the x-axis   |
+| c   | Modifying this variable results in translation on the x-axis |
+| d   | Modifying this variable results in shearing on the y-axis   |
+| e   | Modifying this variable results in shearing on the z-axis along the y-axis    |
+| f   | Modifying this variable results in translation on the y-axis   |
+
+### c)
+
+None of the transformations observed were rotations because the distance of all the vertices were not the same, but always changed.
+
+## Task 4
 
 
