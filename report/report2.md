@@ -47,3 +47,17 @@ What happens here is that opengl blends the colors between the defined vertices.
 ](images/a2_2a.png)
 
 ### b)
+
+#### i)
+
+When swapping the colors of the different triangles we could see that the color of the portions where they overlapped changed. By swapping the colors this occured because the triangles are rendered at different depths with different opacity. The opacity and order of the triangles in an overlapping area matters because the intensity of the colors will contribute differently due to this.
+
+#### ii)
+
+When swapping the depth of the triangles we witness the same effect, but due to changing the depth of the triangle themselves instead of the colors with different opacity.
+
+## Task 3
+
+### a)
+
+
